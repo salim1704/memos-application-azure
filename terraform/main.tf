@@ -63,6 +63,7 @@ module "front_door" {
   prefix              = var.prefix
   resource_group_name = var.resource_group_name
   container_app_fqdn  = module.container_app.container_app_fqdn
+  domain_name         = var.domain_name
   tags                = var.tags
   depends_on          = [module.resource_group, module.container_app]
 }

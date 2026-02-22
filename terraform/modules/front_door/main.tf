@@ -42,11 +42,10 @@ resource "azurerm_cdn_frontdoor_origin" "main" {
 resource "azurerm_cdn_frontdoor_custom_domain" "main" {
   name                     = "${var.prefix}-custom-domain"
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.main.id
-  host_name                = "tm.abdulqayoom.co.uk"
+  host_name                = "tm.${var.domain_name}"
 
   tls {
     certificate_type    = "ManagedCertificate"
-    minimum_tls_version = "TLS12"
   }
 }
 
@@ -73,7 +72,7 @@ resource "azurerm_cdn_frontdoor_custom_domain_association" "main" {
 # DNS — Route53
 
 data "aws_route53_zone" "main" {
-  name = "abdulqayoom.co.uk"
+  name = var.domain_name
 }
 
 resource "aws_route53_record" "memos" {
@@ -86,7 +85,7 @@ resource "aws_route53_record" "memos" {
 
 resource "aws_route53_record" "validation" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "_dnsauth.tm.abdulqayoom.co.uk"
+  name    = "_dnsauth.tm.${var.domain_name}" 
   type    = "TXT"
   ttl     = 300
   records = [azurerm_cdn_frontdoor_custom_domain.main.validation_token]

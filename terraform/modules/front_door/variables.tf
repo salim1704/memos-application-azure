@@ -17,3 +17,8 @@ variable "container_app_fqdn" {
   description = "Fully qualified domain name of the container app"
   type        = string
 }
+
+variable "domain_name" {
+  description = "Base domain name for DNS"
+  type        = string
+}

@@ -29,11 +29,6 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-variable "storage_account_id" {
-  description = "ID of the Terraform state storage account"
-  type        = string
-}
-
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
@@ -44,4 +39,9 @@ variable "image_tag" {
   description = "Tag of the container image to deploy"
   type        = string
   default     = "latest"
+}
+
+variable "domain_name" {
+  description = "Base domain name for DNS"
+  type        = string
 }
