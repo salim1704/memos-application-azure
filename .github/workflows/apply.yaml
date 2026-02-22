@@ -57,6 +57,10 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      - name: Import orphaned container app
+        run: terraform import module.container_app.azurerm_container_app.memos /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/memos-rg/providers/Microsoft.App/containerApps/memos-container-app
+        continue-on-error: true
+
       - name: Terraform Plan
         run: terraform plan -out=tfplan -input=false
       
