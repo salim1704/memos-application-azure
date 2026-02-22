@@ -38,7 +38,7 @@ variable "tags" {
 variable "image_tag" {
   description = "Tag of the container image to deploy"
   type        = string
-  default     = "latest"
+  default     = ""
 }
 
 variable "domain_name" {
