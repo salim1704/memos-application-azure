@@ -1,0 +1,25 @@
+# node / package managers
+**/node_modules
+**/.pnpm-store
+**/.npm
+**/.cache
+**/.vite
+**/dist
+**/build
+
+# git + ci
+.git
+.github
+
+# logs
+*.log
+
+# terraform
+.terraform
+**/.terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# env
+.env
