@@ -26,7 +26,6 @@ jobs:
       TF_VAR_vnet_address_space: ${{ vars.VNET_ADDRESS_SPACE }}
       TF_VAR_address_prefixes: ${{ vars.ADDRESS_PREFIXES }}
       TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
-      TF_VAR_image_tag: ${{ vars.IMAGE_TAG }}
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -57,7 +56,7 @@ jobs:
 
       - name: Terraform Validate
         run: terraform validate
-
+        
       - name: Terraform Plan
         run: terraform plan -out=tfplan -input=false
       
