@@ -1,0 +1,65 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    if: github.ref == 'refs/heads/main'
+
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    env:
+      TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      TF_VAR_resource_group_name: ${{ vars.RESOURCE_GROUP_NAME }}
+      TF_VAR_prefix: ${{ vars.PREFIX }}
+      TF_VAR_location: ${{ vars.LOCATION }}
+      TF_VAR_vnet_address_space: ${{ vars.VNET_ADDRESS_SPACE }}
+      TF_VAR_address_prefixes: ${{ vars.ADDRESS_PREFIXES }}
+      TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_USE_OIDC: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.14.3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: eu-west-2
+
+      - name: Terraform Init
+        run: terraform init -input=false
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve -input=false
+
+      - name: Verify destroy
+        run: |
+          count=$(terraform state list 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$count" -eq 0 ]; then
+            echo "All Terraform-managed resources destroyed"
+          else
+            echo "$count Terraform-managed resources remain"
+            terraform state list || true
+            exit 1
+          fi
