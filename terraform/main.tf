@@ -67,3 +67,15 @@ module "front_door" {
   tags                = var.tags
   depends_on          = [module.resource_group, module.container_app]
 }
+
+module "grafana" {
+  source              = "./modules/grafana"
+  prefix              = var.prefix
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subscription_id     = var.subscription_id
+  admin_object_id     = var.admin_object_id
+  tags                = var.tags
+  depends_on          = [module.resource_group, module.monitoring]
+}
+

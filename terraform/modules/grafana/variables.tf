@@ -19,16 +19,6 @@ variable "subscription_id" {
   sensitive   = true
 }
 
-variable "vnet_address_space" {
-  description = "Address space for the virtual network"
-  type        = string
-}
-
-variable "address_prefixes" {
-  description = "Address prefixes for the subnet"
-  type        = list(string)
-}
-
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
@@ -39,11 +29,6 @@ variable "image_tag" {
   description = "Tag of the container image to deploy"
   type        = string
   default     = ""
-}
-
-variable "domain_name" {
-  description = "Base domain name for DNS"
-  type        = string
 }
 
 variable "admin_object_id" {
