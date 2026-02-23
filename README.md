@@ -4,15 +4,11 @@
 
 An end-to-end Azure Container Apps deployment of a privacy-focused memo application, built using Docker, Terraform, and GitHub Actions to automate infrastructure provisioning and application delivery.
 
-**Live Demo:**  
-https://tm.abdulqayoom.co.uk
-
 ---
 
 ## Live Application
 
-<!-- Add screenshot of live site here -->
-<!-- ![Live Site](screenshots/site.png) -->
+
 
 ---
 
@@ -90,6 +86,11 @@ memos-application-azure
 ---
 
 ## Terraform Infrastructure
+
+### Azure Resource Group
+
+<img width="1186" height="747" alt="rg" src="https://github.com/user-attachments/assets/99e5464f-7299-4019-a747-db05575a21bc" />
+
 
 ### Bootstrap (One-Time Setup)
 
@@ -171,6 +172,7 @@ Pipeline stages:
 - Container log volume (time series)
 - Recent errors (table)
 
+<img width="1915" height="842" alt="grafana" src="https://github.com/user-attachments/assets/b97cd9b1-b45d-411c-b7c3-8f04cf627c13" />
 
 
 ## Tech Stack
