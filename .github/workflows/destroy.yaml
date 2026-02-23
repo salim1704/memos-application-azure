@@ -50,7 +50,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -input=false
-
+      - name: Debug vars
+        run: |
+          if [ -z "$TF_VAR_admin_object_id" ]; then
+            echo "ADMIN_OBJECT_ID is empty."
+          else
+            echo "ADMIN_OBJECT_ID is set."
+          fi
+          
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -input=false
 
