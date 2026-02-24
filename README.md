@@ -31,6 +31,10 @@ An end-to-end Azure Container Apps deployment of a privacy-focused memo applicat
 <!-- Add architecture diagram here -->
 <!-- ![Architecture](screenshots/architecture.png) -->
 
+### Edge Layer — Azure Front Door
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/393124c1-e734-49b3-9341-0a00b73ad58f" />
+
 ### Infrastructure Components
 
 - **Compute:** Azure Container Apps (Consumption plan, zone-redundant)
@@ -89,8 +93,7 @@ memos-application-azure
 
 ### Azure Resource Group
 
-<img width="1186" height="747" alt="rg" src="https://github.com/user-attachments/assets/99e5464f-7299-4019-a747-db05575a21bc" />
-
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a7f557d3-c7eb-4667-9e7a-e61f82da3ba9" />
 
 ### Bootstrap (One-Time Setup)
 
