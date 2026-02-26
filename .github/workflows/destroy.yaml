@@ -27,6 +27,7 @@ jobs:
       TF_VAR_vnet_address_space: ${{ vars.VNET_ADDRESS_SPACE }}
       TF_VAR_address_prefixes: ${{ vars.ADDRESS_PREFIXES }}
       TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
+      TF_VAR_admin_object_id: ${{ secrets.ADMIN_OBJECT_ID }}
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -49,7 +50,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -input=false
-
+      - name: Debug vars
+        run: |
+          if [ -z "$TF_VAR_admin_object_id" ]; then
+            echo "ADMIN_OBJECT_ID is empty."
+          else
+            echo "ADMIN_OBJECT_ID is set."
+          fi
+          
       - name: Terraform Destroy
         run: terraform destroy -auto-approve -input=false
 
