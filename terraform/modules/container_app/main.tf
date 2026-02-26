@@ -46,7 +46,7 @@ resource "azurerm_container_app" "memos" {
 
       env {
         name  = "MEMOS_DSN"
-        value = "postgres://${var.admin_username}:${var.db_password}@${var.db_fqdn}:5432/${var.database_name}"
+        value = "postgres://${var.admin_username}:${urlencode(var.db_password)}@${var.db_fqdn}:5432/${var.database_name}"
       }
     }
   }
