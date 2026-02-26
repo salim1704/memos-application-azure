@@ -43,4 +43,5 @@ resource "azurerm_key_vault_secret" "db_password" {
   name         = "${var.prefix}-db-password"
   value        = random_password.db.result
   key_vault_id = azurerm_key_vault.main.id
+  depends_on = [azurerm_key_vault.main]
 }
