@@ -14,3 +14,8 @@ output "container_apps_subnet_cidr" {
   description = "CIDR block of the Container Apps subnet"
   value       = azurerm_subnet.container_apps_subnet.address_prefixes[0]
 }
+
+output "postgresql_subnet_id" {
+  description = "ID of the PostgreSQL subnet"
+  value       = azurerm_subnet.postgresql_subnet.id
+}

@@ -18,7 +18,7 @@ variable "vnet_address_space" {
   type        = string
 }
 
-variable "address_prefixes" {
+variable "app_address_prefixes" {
   description = "Address prefixes for the subnet"
   type        = list(string)
 }
@@ -27,4 +27,9 @@ variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
   default     = {}
+}
+
+variable "postgresql_address_prefixes" {
+  description = "Address prefixes for the PostgreSQL subnet"
+  type        = list(string)
 }
