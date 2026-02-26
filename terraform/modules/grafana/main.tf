@@ -6,7 +6,7 @@ resource "azurerm_dashboard_grafana" "main" {
   api_key_enabled                   = false
   deterministic_outbound_ip_enabled = false
   public_network_access_enabled     = true
-  sku                               = "basic"
+  sku                               = "Standard"
   tags                              = var.tags
 
   identity {
