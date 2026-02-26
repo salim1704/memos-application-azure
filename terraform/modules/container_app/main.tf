@@ -12,6 +12,11 @@ resource "azurerm_container_app_environment" "main" {
     name                  = "Consumption"
     workload_profile_type = "Consumption"
   }
+
+    lifecycle {
+    ignore_changes = [infrastructure_resource_group_name]
+  }
+
 }
 
 resource "azurerm_container_app" "memos" {
