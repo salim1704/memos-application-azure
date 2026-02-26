@@ -60,3 +60,8 @@ variable "admin_username" {
   description = "Username for the PostgreSQL administrator"
   type        = string
 }
+
+variable "gh_actions_object_id" {
+  description = "Object ID of the GitHub Actions service principal"
+  type        = string
+}

@@ -23,3 +23,8 @@ variable "principal_id" {
   description = "Principal ID of the managed identity"
   type        = string
 }
+
+variable "gh_actions_object_id" {
+  description = "Object ID of the GitHub Actions service principal"
+  type        = string
+}

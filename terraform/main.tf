@@ -91,6 +91,7 @@ module "key_vault" {
   resource_group_name = var.resource_group_name
   principal_id        = module.identity.principal_id
   tags                = var.tags
+  gh_actions_object_id = var.gh_actions_object_id
   depends_on          = [module.resource_group]
 }
 
