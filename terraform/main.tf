@@ -11,7 +11,8 @@ module "vnet" {
   location            = var.location
   resource_group_name = var.resource_group_name
   vnet_address_space  = var.vnet_address_space
-  address_prefixes    = var.address_prefixes
+  app_address_prefixes    = var.app_address_prefixes
+  postgresql_address_prefixes = var.postgresql_address_prefixes
   tags                = var.tags
   depends_on          = [module.resource_group]
 }
@@ -54,8 +55,12 @@ module "container_app" {
   login_server             = module.acr.login_server
   identity_id              = module.identity.identity_id
   image_tag                = var.image_tag
+  admin_username = var.admin_username
+  db_password       = module.key_vault.db_password
+  db_fqdn        = module.postgresql.db_fqdn
+  database_name  = module.postgresql.database_name
   tags                     = var.tags
-  depends_on               = [module.resource_group, module.monitoring, module.vnet, module.identity]
+ depends_on = [module.resource_group, module.monitoring, module.vnet, module.identity, module.postgresql, module.key_vault]
 }
 
 module "front_door" {
@@ -79,3 +84,25 @@ module "grafana" {
   depends_on          = [module.resource_group, module.monitoring]
 }
 
+module "key_vault" {
+  source              = "./modules/key_vault"
+  prefix              = var.prefix
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  principal_id        = module.identity.principal_id
+  tags                = var.tags
+  depends_on          = [module.resource_group]
+}
+
+module "postgresql" {
+  source              = "./modules/postgresql"
+  prefix              = var.prefix
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  virtual_network_id  = module.vnet.azurerm_virtual_network_id
+  postgresql_subnet_id = module.vnet.postgresql_subnet_id
+  admin_username      = var.admin_username
+  db_password            = module.key_vault.db_password
+  tags                = var.tags
+  depends_on          = [module.resource_group, module.vnet]
+}

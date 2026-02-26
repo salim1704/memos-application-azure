@@ -24,8 +24,13 @@ variable "vnet_address_space" {
   type        = string
 }
 
-variable "address_prefixes" {
-  description = "Address prefixes for the subnet"
+variable "app_address_prefixes" {
+  description = "Address prefixes for the app subnet"
+  type        = list(string)
+}
+
+variable "postgresql_address_prefixes" {
+  description = "Address prefixes for the postgresql subnet"
   type        = list(string)
 }
 
@@ -49,4 +54,9 @@ variable "domain_name" {
 variable "admin_object_id" {
   description = "Object ID of the user or group to assign Grafana Admin role"
   type        = string 
+}
+
+variable "admin_username" {
+  description = "Username for the PostgreSQL administrator"
+  type        = string
 }
