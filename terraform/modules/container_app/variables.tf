@@ -43,3 +43,24 @@ variable "image_tag" {
   type        = string
   default     = "latest"
 }
+
+variable "db_fqdn" {
+  description = "Fully qualified domain name of the PostgreSQL server"
+  type        = string
+}
+
+variable "database_name" {
+  description = "Name of the PostgreSQL database"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Password for the PostgreSQL administrator"
+  type        = string
+  sensitive   = true
+}
+
+variable "admin_username" {
+  description = "Username for the PostgreSQL administrator"
+  type        = string
+}
