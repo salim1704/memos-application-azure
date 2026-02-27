@@ -29,7 +29,10 @@ An end-to-end Azure Container Apps deployment of a privacy-focused memo applicat
 ## Architecture
 
 <!-- Add architecture diagram here -->
-<!-- ![Architecture](screenshots/architecture.png) -->
+<img width="817" height="631" alt="image" src="https://github.com/user-attachments/assets/664759e4-3c0a-4155-bfc8-af9a81e614ce" />
+
+
+
 
 ### Edge Layer — Azure Front Door
 
